@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import { NextSeo } from "next-seo";
 import { allPosts, allProjects, Post, Project } from ".contentlayer/generated";
 import { pick } from "@contentlayer/client";
 
@@ -15,9 +16,27 @@ type HomeProps = {
   projects: Project[];
 };
 
+const seoTitle = "Rishi Mehra";
+const seoDesc =
+  "A designer/frontend developer hybrid that loves to build great products with delightful interfaces.";
+
+
 export default function Home({ posts, projects }: HomeProps) {
   return (
     <>
+       <NextSeo
+        title={seoTitle}
+        description={seoDesc}
+        openGraph={{
+          title: seoTitle,
+          description: seoDesc,
+          url: `https://rishimehra.in`,
+          site_name: "Rishi Mehra",
+        }}
+        twitter={{
+          cardType: "summary_large_image",
+        }}
+      />
       <div className="flex flex-col gap-20 md:gap-28">
         <div>
           <h1 className="animate-in">Rishi Mehra</h1>
