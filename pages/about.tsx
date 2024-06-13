@@ -90,7 +90,7 @@ const seoTitle = "About | Samuel Kraft";
 const seoDesc =
   "A designer/frontend developer hybrid that loves to build great products with delightful interfaces.";
 
-export default function About({
+export default function About(){
   return (
     <>
       <NextSeo
