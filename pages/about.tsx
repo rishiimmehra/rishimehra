@@ -4,7 +4,6 @@ import { NextSeo } from "next-seo";
 import Link from "components/Link";
 import Section from "components/Section";
 import Workplaces from "components/Workplaces";
-import Gallery from "components/Gallery";
 
 import raycastLogo from "public/projects/raycast-logo.jpeg";
 import bitrefillLogo from "public/projects/bitrefill-logo.png";
@@ -109,7 +108,7 @@ export default function About(){
       />
       <div className="flex flex-col gap-16 md:gap-24">
         <div className="hidden sm:block">
-          <Gallery lastActivity={lastActivity} />
+         
         </div>
         <div className="-mb-8 sm:hidden animate-in">
           <Image
