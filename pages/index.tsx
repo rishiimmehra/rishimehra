@@ -20,7 +20,7 @@ export default function Home({ posts, projects }: HomeProps) {
     <>
       <div className="flex flex-col gap-20 md:gap-28">
         <div>
-          <h1 className="animate-in">Samuel Kraft</h1>
+          <h1 className="animate-in">Rishi Mehra</h1>
           <p
             className="text-secondary animate-in"
             style={{ "--index": 1 } as React.CSSProperties}
