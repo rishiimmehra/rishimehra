@@ -4,8 +4,6 @@ import { NextSeo } from "next-seo";
 import Link from "components/Link";
 import Section from "components/Section";
 import Workplaces from "components/Workplaces";
-import Gallery from "components/Gallery";
-import { ActivityType } from "components/Activity";
 
 import raycastLogo from "public/projects/raycast-logo.jpeg";
 import bitrefillLogo from "public/projects/bitrefill-logo.png";
@@ -16,8 +14,6 @@ import notionLogo from "public/projects/notion-logo.png";
 import strengthLogo from "public/projects/strength-logo.png";
 import shapeLogo from "public/projects/shape-logo.png";
 import avatar from "public/avatar.png";
-
-import { getActivities, getActivity } from "lib/strava";
 
 export const connectLinks = [
   { label: "𝕏", href: "https://x.com/samuelkraft" },
@@ -95,10 +91,6 @@ const seoDesc =
   "A designer/frontend developer hybrid that loves to build great products with delightful interfaces.";
 
 export default function About({
-  lastActivity,
-}: {
-  lastActivity: ActivityType;
-}) {
   return (
     <>
       <NextSeo
@@ -190,30 +182,3 @@ export default function About({
     </>
   );
 }
-
-export const getStaticProps = async () => {
-  const activities: ActivityType[] = await getActivities();
-  const lastNonVirtualActivityWithPhoto = activities
-    .filter((activity) =>
-      [
-        "Run",
-        "TrailRun",
-        "Bike",
-        "Ride",
-        "Swim",
-        "Hike",
-        "GravelRide",
-        "NordicSki",
-      ].includes(activity.sport_type)
-    )
-    .find((activity) => activity.total_photo_count > 0);
-  const activity = await getActivity(
-    lastNonVirtualActivityWithPhoto?.id as number
-  );
-  return {
-    props: {
-      lastActivity: activity,
-    },
-    revalidate: 3600,
-  };
-};
