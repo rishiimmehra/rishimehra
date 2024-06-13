@@ -99,8 +99,8 @@ export default function About(){
         openGraph={{
           title: seoTitle,
           description: seoDesc,
-          url: `https://samuelkraft.com/about/`,
-          site_name: "Samuel Kraft",
+          url: `https://rishimehra.in/about/`,
+          site_name: "Rishi Mehra",
         }}
         twitter={{
           cardType: "summary_large_image",
@@ -125,7 +125,7 @@ export default function About(){
           <Section heading="About me" headingAlignment="right">
             <div className="flex flex-col gap-6">
               <p>
-                <em className="font-semibold">Hi there!</em>&nbsp; I’m Samuel, a
+                <em className="font-semibold">Hi there!</em>&nbsp; I’m Rishi, a
                 designer/frontend developer hybrid that loves to build great
                 products with delightful interfaces.
               </p>
