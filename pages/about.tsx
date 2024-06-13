@@ -16,8 +16,8 @@ import shapeLogo from "public/projects/shape-logo.png";
 import avatar from "public/avatar.png";
 
 export const connectLinks = [
-  { label: "𝕏", href: "https://x.com/samuelkraft" },
-  { label: "Email", href: "mailto:samuelkraft@me.com" },
+  { label: "𝕏", href: "https://x.com/me_rishimehra" },
+  { label: "Email", href: "mailto:rishimehra@me.com" },
   { label: "GitHub", href: "https://github.com/samuelkraft" },
   { label: "Strava", href: "https://strava.com/athletes/18364318" },
 ];
@@ -86,7 +86,7 @@ const sideProjects = [
   },
 ];
 
-const seoTitle = "About | Samuel Kraft";
+const seoTitle = "About | Rishi Mehra";
 const seoDesc =
   "A designer/frontend developer hybrid that loves to build great products with delightful interfaces.";
 
