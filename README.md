@@ -1,4 +1,4 @@
-# samuelkraft.com
+# Rishi Mehra
 
 My personal website/portfolio/blog.
 
