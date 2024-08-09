@@ -42,6 +42,14 @@ const projectComputedFields: ComputedFields = {
     type: "string",
     resolve: (doc) => getSlug(doc),
   },
+  image: {
+    type: "string",
+    resolve: (doc) => `/projects/${getSlug(doc)}/thumb.png`,
+  },
+  og: {
+    type: "string",
+    resolve: (doc) => `/projects/${getSlug(doc)}/og.jpg`,
+  },
 };
 
 export const Project = defineDocumentType(() => ({
