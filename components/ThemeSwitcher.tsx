@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Listbox } from "@headlessui/react";
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import cn from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
@@ -45,7 +45,7 @@ export default function ThemeSwitcher() {
           );
           return (
             <div className="relative mt-1">
-              <Listbox.Button
+              <ListboxButton
                 className={cn(
                   "relative w-8 h-8 cursor-default rounded-full flex items-center justify-center focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300",
                   open && "bg-secondaryA"
@@ -58,16 +58,16 @@ export default function ThemeSwitcher() {
                 ) : (
                   <IconSun className={iconClassName} />
                 )}
-              </Listbox.Button>
+              </ListboxButton>
               <AnimatePresence>
                 {open && (
-                  <Listbox.Options
+                  <ListboxOptions
                     as={motion.ul}
                     static
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ type: "spring", bounce: 0.3, duration: 0.3 }}
+                    transition
                     className="absolute right-0 p-2 mt-2 overflow-auto text-base origin-top-right shadow-lg max-h-60 w-42 rounded-xl bg-blur backdrop-blur-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                   >
                     {themes
@@ -75,7 +75,7 @@ export default function ThemeSwitcher() {
                         isArcBrowser ? true : theme.id !== "arc"
                       )
                       .map((theme) => (
-                        <Listbox.Option
+                        <ListboxOption
                           key={theme.id}
                           className={({ active }) =>
                             `relative cursor-default select-none py-2 pl-10 pr-4 rounded-md ${
@@ -103,9 +103,9 @@ export default function ThemeSwitcher() {
                               ) : null}
                             </>
                           )}
-                        </Listbox.Option>
+                        </ListboxOption>
                       ))}
-                  </Listbox.Options>
+                  </ListboxOptions>
                 )}
               </AnimatePresence>
             </div>
