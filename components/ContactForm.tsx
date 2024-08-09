@@ -44,7 +44,7 @@ const ContactForm = ({}: /* props */ ContactFormProps) => {
         name="name"
         value={formData.name}
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        placeholder="Name"
+        placeholder="Full Name"
         className="border rounded-md p-2" // Add your custom styles
       />
 
