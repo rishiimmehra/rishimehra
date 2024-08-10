@@ -23,6 +23,7 @@
     "next": "^14.2.5",
     "next-contentlayer": "^0.2.9",
     "next-seo": "^5.15.0",
+    "next-sitemap": "^4.2.3",
     "next-themes": "^0.2.1",
     "random-words": "^1.2.1",
     "react": "^18.3.1",
