@@ -1,29 +1,32 @@
-const dynamic = require("next/dynamic");
-const fs = require("fs");
-const globby = dynamic(() => import("globby"));
-
-function addPage(page) {
-  const path = page.replace("pages", "").replace(".js", "").replace(".mdx", "");
-  const route = path === "/index" ? "" : path;
-
-  return `  <url>
-    <loc>${`https://samuelkraft.com}${route}`}</loc>
-    <changefreq>hourly</changefreq>
-  </url>`;
-}
+const fs = require('fs');
+const path = require('path');
 
 async function generateSitemap() {
-  // Ignore Next.js specific files (e.g., _app.js) and API routes.
-  const pages = await globby([
+  // Ignore Next.js specific files and API routes
+  const globby = await import('globby')([
     "pages/**/*{.js,.mdx,.tsx}",
     "!pages/_*.tsx",
     "!pages/api",
   ]);
-  const sitemap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map(addPage).join("\n")}
+
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages.map((page) => {
+    const filePath = path.join(__dirname, page);
+    const route = filePath.replace(/^\.\/pages/, '').replace(/\.(js|mdx|tsx)$/, '');
+    const lastmod = fs.existsSync(filePath) ? fs.statSync(filePath).mtime.toISOString() : new Date().toISOString();
+
+    return `
+      <url>
+        <loc>${`https://www.rishimehra.in}${route}`}</loc>
+        <lastmod>${lastmod}</lastmod>
+      </url>
+    `;
+  }).join('\n')}
 </urlset>`;
 
-  fs.writeFileSync("public/sitemap.xml", sitemap);
+  fs.writeFileSync(path.join(__dirname, 'public/sitemap.xml'), sitemapXml);
 }
 
-generateSitemap();
+// Call generateSitemap during build process (e.g., in a custom script)
+module.exports = generateSitemap;
