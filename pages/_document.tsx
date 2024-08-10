@@ -7,16 +7,9 @@ export default class MyDocument extends Document {
         <Head>
           <meta
             name="google-site-verification"
-            content="RJQJipgMnyEfg3XESXsr7jXnVDOaAr1xtlCGRaoTQSo"
+            content="hbjX60cKw02DgxIEZagRx5S1h9obDDyMZG2pSbs_7RQ"
           />
-          <link
-            rel="webmention"
-            href="https://webmention.io/samuelkraft.com/webmention"
-          />
-          <link
-            rel="pingback"
-            href="https://webmention.io/samuelkraft.com/xmlrpc"
-          />
+          
           <link href="https://github.com/samuelkraft" rel="me" />
         </Head>
         <body>
