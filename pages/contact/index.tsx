@@ -30,7 +30,7 @@ export default function contact () {
               className="text-secondary animate-in"
               style={{ "--index": 1 } as React.CSSProperties}
             >
-              Hey! Tell us all the things 👋
+              Hey! Tell us all the things 
             </p>
           </div>
           <div
@@ -44,4 +44,3 @@ export default function contact () {
   </>
   )
 }
-

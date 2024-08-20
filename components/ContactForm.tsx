@@ -43,8 +43,7 @@ function ContactForm() {
       }
 
       const data = await response.json();
-      console.log('Form   
- submitted successfully:', data);
+      console.log('Form submitted successfully:', data);
       // Handle success, e.g., show a success message
     } catch (error) {
       console.error('Error submitting form:', error);
