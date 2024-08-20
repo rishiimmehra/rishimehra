@@ -6,7 +6,7 @@ import {
   Input,
   Label,
   Textarea,
-  Field
+  Field,
 } from "@headlessui/react";
 
 function ContactForm() {
@@ -14,7 +14,7 @@ function ContactForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [projectDetails, setProjectDetails] = useState("");
 
   const handleProjectTypeChange = (type) => {
@@ -28,14 +28,22 @@ function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const formData = {
+      projectTypes,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      projectDetails,
+    };
+
     try {
       const response = await fetch('/api/leadform', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),   
-
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
@@ -52,9 +60,7 @@ function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}
-    className="flex flex-col gap-6"
-    >
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       <div>
         <Field as="div" className="flex flex-col gap-3">
           <Label htmlFor="projectTypes">I'm interested in...</Label>
@@ -103,6 +109,7 @@ function ContactForm() {
           placeholder="Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+          className="rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
         />
       </div>
       <Input
