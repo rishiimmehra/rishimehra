@@ -18,7 +18,7 @@ ${pages.map((page) => {
 
     return `
       <url>
-        <loc>${`https://www.rishimehra.in}${route}`}</loc>
+        <loc>${`http://localhost:3000}${route}`}</loc>
         <lastmod>${lastmod}</lastmod>
       </url>
     `;

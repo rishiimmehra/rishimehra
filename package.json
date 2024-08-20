@@ -28,6 +28,7 @@
     "random-words": "^1.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-phone-input-2": "^2.15.1",
     "rehype-prism-plus": "^1.5.0",
     "remark-code-titles": "^0.1.2",
     "sass": "^1.57.1",
