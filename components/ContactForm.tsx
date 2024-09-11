@@ -112,17 +112,23 @@ function ContactForm() {
           className="rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
         />
       </div>
-      <Input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <PhoneInput
-        country={"in"} // Set default country to India
-        value={phoneNumber}
-        onChange={setPhoneNumber}
-      />
+      <div className="flex flex-row gap-4">
+        <Input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
+        />
+        <PhoneInput
+          country={"in"} // Set default country to India
+          value={phoneNumber}
+          onChange={setPhoneNumber}
+          containerClass="bg-[var(--sand2)]"
+          inputClass="bg-[var(--sand2)]"
+          buttonClass="bg-[var(--sand2)]"
+        />
+      </div>
       <Textarea
         placeholder="Tell me about your project."
         value={projectDetails}

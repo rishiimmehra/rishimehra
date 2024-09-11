@@ -8,17 +8,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { projectTypes, firstName, lastName, email, phoneNumber, projectDetails } = req.body;
 
-  // Replace with your Zoho Bigin API endpoint URL
-  const zohoBiginUrl = 'https://bigin.zoho.in/bigin/org60031646012';
-  const zohoBiginAuth = `Bearer ${process.env.ZOHO_BIGIN_ACCESS_TOKEN}`;
+  // Updated URL for Zoho Bigin V2
+  const zohoBiginUrl = 'https://www.zohoapis.com/bigin/v2/Contacts';
+  const zohoBiginAuth = `Zoho-oauthtoken ${process.env.ZOHO_BIGIN_ACCESS_TOKEN}`;
 
   const contactData = {
-    // Map form data to Zoho Bigin contact fields
-    first_name: firstName,
-    last_name: lastName,
-    email: email,
-    phone: phoneNumber,
-    // ... other fields
+    data: [{
+      First_Name: firstName,
+      Last_Name: lastName,
+      Email: email,
+      Phone: phoneNumber,
+      Project: projectTypes.join(", "),
+      Description: projectDetails,
+    }],
   };
 
   try {
@@ -29,9 +31,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     });
 
-    res.status(200).json({ message: 'Form submitted successfully' });
+    res.status(200).json({ message: 'Form submitted successfully', data: response.data });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error submitting form' });
+    console.error('Error response:', error.response ? error.response.data : error.message);
+    res.status(500).json({ message: 'Error submitting form', error: error.response ? error.response.data : error.message });
   }
 }
