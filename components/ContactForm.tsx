@@ -38,7 +38,7 @@ function ContactForm() {
       lastName,
       email,
       phoneNumber,
-      projectDetails,
+      projectDetails
     };
 
     try {
