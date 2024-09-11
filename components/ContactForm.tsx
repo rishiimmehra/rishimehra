@@ -25,6 +25,10 @@ function ContactForm() {
     }
   };
 
+  const handlePhoneNumberChange = (value, country, e, formattedValue) => {
+    setPhoneNumber(formattedValue); // Use formattedValue instead of value
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -123,7 +127,7 @@ function ContactForm() {
         <PhoneInput
           country={"in"} // Set default country to India
           value={phoneNumber}
-          onChange={setPhoneNumber}
+          onChange={handlePhoneNumberChange}
           containerClass="bg-[var(--sand2)]"
           inputClass="bg-[var(--sand2)]"
           buttonClass="bg-[var(--sand2)]"
