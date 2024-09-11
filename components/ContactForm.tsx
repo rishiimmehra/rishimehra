@@ -38,7 +38,7 @@ function ContactForm() {
       lastName,
       email,
       phoneNumber,
-      projectDetails
+      projectDetails,
     };
 
     try {
@@ -67,7 +67,7 @@ function ContactForm() {
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       <div>
         <Field as="div" className="flex flex-col gap-3">
-          <Label htmlFor="projectTypes">I'm interested in...</Label>
+          <Label htmlFor="projectTypes">I am interested in...</Label>
           <div className="flex flex-wrap gap-4">
             <Checkbox
               checked={projectTypes.includes("Business Website")}
