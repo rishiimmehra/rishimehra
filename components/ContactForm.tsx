@@ -17,7 +17,7 @@ function ContactForm() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [projectDetails, setProjectDetails] = useState("");
 
-  const handleProjectTypeChange = (type) => {
+  const handleProjectTypeChange = (type: string) => {
     if (projectTypes.includes(type)) {
       setProjectTypes(projectTypes.filter((t) => t !== type));
     } else {
