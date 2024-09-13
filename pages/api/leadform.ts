@@ -53,6 +53,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { projectTypes, firstName, lastName, email, phoneNumber, projectDetails } = req.body;
 
+  if (!projectTypes || projectTypes.length === 0) {
+    return res.status(400).json({ message: 'At least one project type is required' });
+  }
+
+  if (!firstName || !lastName || !email || !phoneNumber) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+
   try {
     console.log('Attempting to get a fresh access token...');
     const { access_token: accessToken, api_domain: apiDomain } = await getAccessToken();
