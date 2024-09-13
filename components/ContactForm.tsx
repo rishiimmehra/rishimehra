@@ -19,8 +19,10 @@ function ContactForm() {
 
   const handleProjectTypeChange = (type: string) => {
     if (projectTypes.includes(type)) {
+      // Filter elements that are not equal to type
       setProjectTypes(projectTypes.filter((t) => t !== type));
     } else {
+      // Add the type to the array
       setProjectTypes([...projectTypes, type]);
     }
   };
