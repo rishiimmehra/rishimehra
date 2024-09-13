@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/high-res.css";
 import {
@@ -9,32 +9,42 @@ import {
   Field,
 } from "@headlessui/react";
 
+// Define types
+type ProjectType = "Business Website" | "Blog Website" | "Online Store" | "E-commerce Platform";
+
+interface FormData {
+  projectTypes: ProjectType[];
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  projectDetails: string;
+}
+
 function ContactForm() {
-  const [projectTypes, setProjectTypes] = useState([]);
+  const [projectTypes, setProjectTypes] = useState<ProjectType[]>([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [projectDetails, setProjectDetails] = useState("");
 
-  const handleProjectTypeChange = (type: string) => {
+  const handleProjectTypeChange = (type: ProjectType) => {
     if (projectTypes.includes(type)) {
-      // Filter elements that are not equal to type
       setProjectTypes(projectTypes.filter((t) => t !== type));
     } else {
-      // Add the type to the array
       setProjectTypes([...projectTypes, type]);
     }
   };
 
-  const handlePhoneNumberChange = (value, country, e, formattedValue) => {
-    setPhoneNumber(formattedValue); // Use formattedValue instead of value
+  const handlePhoneNumberChange = (value: string, country: any, e: any, formattedValue: string) => {
+    setPhoneNumber(formattedValue);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = {
+    const formData: FormData = {
       projectTypes,
       firstName,
       lastName,
@@ -71,34 +81,16 @@ function ContactForm() {
         <Field as="div" className="flex flex-col gap-3">
           <Label htmlFor="projectTypes">I am interested in...</Label>
           <div className="flex flex-wrap gap-4">
-            <Checkbox
-              checked={projectTypes.includes("Business Website")}
-              onChange={() => handleProjectTypeChange("Business Website")}
-              className="flex items-center cursor-pointer rounded-full h-10 px-4 text-secondary bg-[var(--sand2)] transition data-[checked]:outline data-[checked]:text-primary"
-            >
-              Business Website
-            </Checkbox>
-            <Checkbox
-              checked={projectTypes.includes("Blog Website")}
-              onChange={() => handleProjectTypeChange("Blog Website")}
-              className="flex items-center cursor-pointer rounded-full h-10 px-4 text-secondary bg-[var(--sand2)] transition data-[checked]:outline data-[checked]:text-primary"
-            >
-              Blog
-            </Checkbox>
-            <Checkbox
-              checked={projectTypes.includes("Online Store")}
-              onChange={() => handleProjectTypeChange("Online Store")}
-              className="flex items-center cursor-pointer rounded-full h-10 px-4 text-secondary bg-[var(--sand2)] transition data-[checked]:outline data-[checked]:text-primary"
-            >
-              Online Store
-            </Checkbox>
-            <Checkbox
-              checked={projectTypes.includes("E-commerce Platform")}
-              onChange={() => handleProjectTypeChange("E-commerce Platform")}
-              className="flex items-center cursor-pointer rounded-full h-10 px-4 text-secondary bg-[var(--sand2)] transition data-[checked]:outline data-[checked]:text-primary"
-            >
-              E-commerce
-            </Checkbox>
+            {(["Business Website", "Blog Website", "Online Store", "E-commerce Platform"] as const).map((type) => (
+              <Checkbox
+                key={type}
+                checked={projectTypes.includes(type)}
+                onChange={() => handleProjectTypeChange(type)}
+                className="flex items-center cursor-pointer rounded-full h-10 px-4 text-secondary bg-[var(--sand2)] transition data-[checked]:outline data-[checked]:text-primary"
+              >
+                {type}
+              </Checkbox>
+            ))}
           </div>
         </Field>
       </div>
@@ -107,14 +99,14 @@ function ContactForm() {
           type="text"
           placeholder="First Name"
           value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
           className="rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
         />
         <Input
           type="text"
           placeholder="Last Name"
           value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
           className="rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
         />
       </div>
@@ -123,11 +115,11 @@ function ContactForm() {
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
           className="rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
         />
         <PhoneInput
-          country={"in"} // Set default country to India
+          country={"in"}
           value={phoneNumber}
           onChange={handlePhoneNumberChange}
           containerClass="bg-[var(--sand2)]"
@@ -138,7 +130,7 @@ function ContactForm() {
       <Textarea
         placeholder="Tell me about your project."
         value={projectDetails}
-        onChange={(e) => setProjectDetails(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProjectDetails(e.target.value)}
       />
       <button type="submit">Submit</button>
     </form>
