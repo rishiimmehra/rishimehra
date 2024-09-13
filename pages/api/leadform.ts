@@ -1,7 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
-async function getAccessToken() {
+interface TokenResponse {
+  access_token: string;
+  api_domain: string;
+}
+
+async function getAccessToken(): Promise<TokenResponse> {
   const refreshToken = process.env.ZOHO_BIGIN_REFRESH_TOKEN;
   const clientId = process.env.ZOHO_BIGIN_CLIENT_ID;
   const clientSecret = process.env.ZOHO_BIGIN_CLIENT_SECRET;
@@ -15,7 +20,7 @@ async function getAccessToken() {
   console.log('Auth Domain:', authDomain);
 
   try {
-    const response = await axios.post(refreshUrl, null, {
+    const response = await axios.post<TokenResponse>(refreshUrl, null, {
       params: {
         refresh_token: refreshToken,
         client_id: clientId,
@@ -26,13 +31,18 @@ async function getAccessToken() {
 
     console.log('Token refresh response:', response.data);
     if (response.data.access_token && response.data.api_domain) {
-      return { accessToken: response.data.access_token, apiDomain: response.data.api_domain };
+      return response.data;
     } else {
       throw new Error('Access token or API domain not found in response');
     }
   } catch (error) {
-    console.error('Error refreshing token:', error.response ? error.response.data : error.message);
-    throw new Error(`Failed to refresh token: ${error.response ? JSON.stringify(error.response.data) : error.message}`);
+    if (axios.isAxiosError(error)) {
+      console.error('Error refreshing token:', error.response?.data || error.message);
+      throw new Error(`Failed to refresh token: ${JSON.stringify(error.response?.data) || error.message}`);
+    } else {
+      console.error('Unexpected error:', error);
+      throw new Error('An unexpected error occurred while refreshing the token');
+    }
   }
 }
 
@@ -45,8 +55,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     console.log('Attempting to get a fresh access token...');
-    const { accessToken, apiDomain } = await getAccessToken();
-    console.log('Access Token obtained:', accessToken?.substring(0, 5) + '...');
+    const { access_token: accessToken, api_domain: apiDomain } = await getAccessToken();
+    console.log('Access Token obtained:', accessToken.substring(0, 5) + '...');
     console.log('API Domain:', apiDomain);
 
     const zohoBiginUrl = `${apiDomain}/bigin/v2/Contacts`;
@@ -75,10 +85,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log('Zoho Bigin response:', response.data);
     res.status(200).json({ message: 'Form submitted successfully', data: response.data });
   } catch (error) {
-    console.error('Error in Zoho Bigin request:', error.response ? error.response.data : error.message);
-    if (error.response && error.response.headers['content-type'].includes('text/html')) {
-      console.error('Received HTML response instead of JSON. This might indicate a redirect or authentication issue.');
+    if (axios.isAxiosError(error)) {
+      console.error('Error in Zoho Bigin request:', error.response?.data || error.message);
+      if (error.response?.headers['content-type']?.includes('text/html')) {
+        console.error('Received HTML response instead of JSON. This might indicate a redirect or authentication issue.');
+      }
+      res.status(500).json({ message: 'Error submitting form', error: error.response?.data || error.message });
+    } else {
+      console.error('Unexpected error:', error);
+      res.status(500).json({ message: 'An unexpected error occurred', error: 'Internal server error' });
     }
-    res.status(500).json({ message: 'Error submitting form', error: error.response ? error.response.data : error.message });
   }
 }
