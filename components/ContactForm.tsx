@@ -136,13 +136,13 @@ function ContactForm() {
           {formError && <p className="text-red-500 text-sm mt-2">{formError}</p>}
         </Field>
       </div>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row gap-4 w-full">
         <Input
           type="text"
           placeholder="First Name"
           value={firstName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
-          className="rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
+          className="w-1/2 rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
           required
           title="Please enter your first name"
         />
@@ -151,32 +151,32 @@ function ContactForm() {
           placeholder="Last Name"
           value={lastName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
-          className="rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
+          className="w-1/2 rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
           required
           title="Please enter your last name"
         />
       </div>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row gap-4 w-full">
         <Input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-          className="rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
+          className="w-1/2 rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
           required
           title="Please enter a valid email address"
         />
-        <div className="flex-grow">
+        <div className="flex w-1/2">
           <PhoneInput
             country={"in"}
             value={phoneNumber}
             onChange={handlePhoneNumberChange}
-            containerClass="bg-[var(--sand2)]"
-            inputClass="bg-[var(--sand2)] w-full"
-            buttonClass="bg-[var(--sand2)]"
+            containerClass="flex bg-[var(--sand2)] px-4 rounded-lg focus-within:!outline"
+            inputClass="bg-[var(--sand2)] !overflow-hidden w-full"
+            buttonClass="!static !bg-transparent hover:!bg-transparent focus:!bg-transparent !border-r-1 !border-l-0 !border-y-0 !border-primary !-order-1"
             inputProps={{
               required: true,
-              className: "w-full h-10",
+              className: "bg-transparent h-10 focus-visible:!outline-none pl-4",
               title: "Please enter a valid phone number",
               'data-country': 'IN', // Make sure to set a default country code
             }}
@@ -186,12 +186,14 @@ function ContactForm() {
       </div>
       <Textarea
         placeholder="Tell me about your project."
+        rows={3}
         value={projectDetails}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProjectDetails(e.target.value)}
+        className="w-full rounded-lg h-10 px-4 py-2 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
         required
         title="Please provide some details about your project"
       />
-      <button type="submit" className="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition">Submit</button>
+      <button type="submit" className="bg-brand w-auto text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition">Submit</button>
     </form>
   );
 }

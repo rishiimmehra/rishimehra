@@ -331,3 +331,40 @@ article .remark-code-title + pre {
 .warning > p:last-of-type {
   margin-bottom: 0;
 }
+
+.react-tel-input .flag-dropdown.open .selected-flag {
+  background: transparent !important;
+  border-radius: 3px 0 0 0;
+}
+
+.react-tel-input .selected-flag {
+  background: transparent !important;
+  border-radius: 3px 0 0 0;
+  padding: 0 !important;
+}
+
+.react-tel-input .selected-flag:hover, .react-tel-input .selected-flag:focus {
+  background-color: transparent !important;
+}
+
+.react-tel-input .country-list {
+  @apply !w-full !max-w-md !rounded-lg !bg-[var(--sand2)] !p-1.5 !backdrop-blur-2xl !duration-300 ease-out flex flex-col gap-1.5 !shadow-none;
+  margin: 10px 0 10px -16px !important;
+}
+
+.react-tel-input .country-list .country {
+  padding: 6px 10px !important;
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+
+.react-tel-input .country-list .flag {
+  position: static !important;
+}
+
+.react-tel-input .country-list .country.highlight, .react-tel-input .country-list .country:hover {
+  background-color: #161615 !important;
+  padding: 6px 10px !important;
+  border-radius: 6px;
+}

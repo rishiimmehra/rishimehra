@@ -23,7 +23,7 @@ export default function contact () {
         }}
       />
       <div className="flex flex-col gap-20">
-        <div className="flex flex-col gap-3.5">
+        <div className="flex flex-col gap-20">
           <div className="flex flex-col gap-2">
             <h1 className="animate-in">Contact</h1>
             <p
