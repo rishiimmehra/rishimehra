@@ -156,17 +156,17 @@ function ContactForm() {
           title="Please enter your last name"
         />
       </div>
-      <div className="flex flex-row gap-4 w-full">
+      <div className="flex flex-col gap-4 w-full sm:flex-row">
         <Input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-          className="w-1/2 rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
+          className="w-auto sm:w-1/2 rounded-lg h-10 px-4 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
           required
           title="Please enter a valid email address"
         />
-        <div className="flex w-1/2">
+        <div className="flex w-auto sm:w-1/2">
           <PhoneInput
             country={"in"}
             value={phoneNumber}
@@ -189,11 +189,11 @@ function ContactForm() {
         rows={3}
         value={projectDetails}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProjectDetails(e.target.value)}
-        className="w-full rounded-lg h-10 px-4 py-2 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
+        className="w-full rounded-lg px-4 py-2 placeholder:text-secondary text-primary bg-[var(--sand2)] transition"
         required
         title="Please provide some details about your project"
       />
-      <button type="submit" className="bg-brand w-auto text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition">Submit</button>
+      <button type="submit" className="bg-brand w-auto text-white mt-8 py-2 px-4 rounded-lg hover:bg-primary-dark transition">Submit</button>
     </form>
   );
 }
