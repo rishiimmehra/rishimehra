@@ -46,7 +46,7 @@ function ContactForm() {
     setPhoneError(null);
   };
 
-  const validatePhoneNumber = (phoneNumber: string, countryCode: string) => {
+  const validatePhoneNumber = (phoneNumber: string, countryCode: string | undefined) => { // Change here
     if (!phoneNumber) {
       setPhoneError("Phone number is required");
       return false;
@@ -79,7 +79,7 @@ function ContactForm() {
     // Validate phone number
     const phoneInput = document.querySelector('input[type="tel"]') as HTMLInputElement;
     if (phoneInput) {
-      const countryCode = phoneInput.getAttribute('data-country');
+      const countryCode = phoneInput.getAttribute('data-country') || undefined; // Ensure it's defined
       if (countryCode && !validatePhoneNumber(phoneNumber, countryCode)) {
         return;
       }
