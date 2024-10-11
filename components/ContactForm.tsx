@@ -148,7 +148,7 @@ function ContactForm() {
       // Redirect after 5 seconds
       setTimeout(() => {
         window.location.href = "/"; // Redirect to home page
-      }, 5000);
+      }, 3000);
     } catch (error) {
       console.error("Error submitting form:", error);
       setFormError(
