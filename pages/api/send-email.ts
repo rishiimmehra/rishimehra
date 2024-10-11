@@ -8,19 +8,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { formData, error } = req.body;
 
+  // Ensure environment variables are defined
+  const emailHost = process.env.EMAIL_HOST || '';
+  const emailPort = Number(process.env.EMAIL_PORT) || 587; // Default to 587 if undefined
+  const emailUser = process.env.EMAIL_USER || '';
+  const emailPass = process.env.EMAIL_PASS || '';
+
   // Configure your email transport
   const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST, // Replace with your email provider's SMTP server
-    port: process.env.EMAIL_PORT, // Replace with the appropriate port
+    host: emailHost,
+    port: emailPort,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.EMAIL_USER, // Your email address
-      pass: process.env.EMAIL_PASS, // Your email password
+      user: emailUser,
+      pass: emailPass,
     },
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: emailUser,
     to: 'contact@rishimehra.in',
     subject: 'Error Submitting Contact Form',
     text: `Error: ${error}\n\nContact Details:\n${JSON.stringify(formData, null, 2)}`,
