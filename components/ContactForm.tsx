@@ -155,13 +155,16 @@ function ContactForm() {
         "An error occurred while submitting the form. Please try again."
       );
 
+      // Type assertion to ensure error has a message property
+      const errorMessage = (error as Error).message;
+
       // Send contact details to your email
       await fetch("/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ formData, error: error.message }),
+        body: JSON.stringify({ formData, error: errorMessage }), // Use the asserted error message
       });
     } finally {
       setIsLoading(false); // Reset loading state after submission
