@@ -46,15 +46,21 @@ function ContactForm() {
     setPhoneError(null);
   };
 
-  const validatePhoneNumber = (phoneNumber: string, countryCode: string | undefined) => { // Change here
+  const validatePhoneNumber = (phoneNumber: string, countryCode: string | undefined) => {
     if (!phoneNumber) {
       setPhoneError("Phone number is required");
       return false;
     }
-    
-    const phoneNumberInstance = parsePhoneNumberFromString(phoneNumber, countryCode);
-    if (!phoneNumberInstance || !phoneNumberInstance.isValid()) {
-      setPhoneError("Please enter a valid phone number for the selected country");
+
+    // Ensure countryCode is defined and cast it to the appropriate type
+    if (countryCode) {
+      const phoneNumberInstance = parsePhoneNumberFromString(phoneNumber, countryCode as CountryCode);
+      if (!phoneNumberInstance || !phoneNumberInstance.isValid()) {
+        setPhoneError("Please enter a valid phone number for the selected country");
+        return false;
+      }
+    } else {
+      setPhoneError("Country code is required");
       return false;
     }
 
