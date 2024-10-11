@@ -8,7 +8,7 @@ import {
   Textarea,
   Field,
 } from "@headlessui/react";
-import { isValidPhoneNumber, parsePhoneNumberFromString } from 'libphonenumber-js';
+import { isValidPhoneNumber, parsePhoneNumberFromString, CountryCode } from 'libphonenumber-js'; // Add CountryCode here
 
 type ProjectType = "Business Website" | "Blog" | "Online Store" | "E-commerce";
 
